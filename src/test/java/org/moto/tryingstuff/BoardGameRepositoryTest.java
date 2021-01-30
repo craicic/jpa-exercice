@@ -1,7 +1,9 @@
 package org.moto.tryingstuff;
 
 import org.junit.jupiter.api.Test;
+import org.moto.tryingstuff.dto.BoardGameDto;
 import org.moto.tryingstuff.model.BoardGame;
+import org.moto.tryingstuff.repository.BoardGameRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,7 @@ import org.springframework.test.context.jdbc.Sql;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @DataJpaTest
 @Sql(scripts = "/sql/data.sql")
@@ -31,5 +33,8 @@ class BoardGameRepositoryTest {
 
     @Test
     void test_things() {
+        BoardGameDto game = repository.findGameDto(2L);
+        logger.debug(game.toString());
+        assertEquals("Munchkin", game.getName());
     }
 }

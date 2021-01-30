@@ -13,6 +13,7 @@ import java.util.Set;
 @Entity
 @Data
 public class Publisher {
+
     @Id
     private long id;
 
