@@ -1,8 +1,6 @@
 package org.moto.tryingstuff.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +11,8 @@ import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Theme {
 
     @Id
@@ -29,4 +29,8 @@ public class Theme {
     @ManyToMany(mappedBy = "themes")
     private Set<BoardGame> boardGames = new HashSet<>();
 
+    public Theme(String name, String shortDesc) {
+        this.name = name;
+        this.shortDesc = shortDesc;
+    }
 }

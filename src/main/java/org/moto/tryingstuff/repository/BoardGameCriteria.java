@@ -1,10 +1,10 @@
 package org.moto.tryingstuff.repository;
 
 import org.moto.tryingstuff.dto.BoardGameDto;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import java.util.List;
+
 public interface BoardGameCriteria {
 
-    BoardGameDto findOverviewById(long id);
+    List<BoardGameDto> findDtosById(long id);
 }

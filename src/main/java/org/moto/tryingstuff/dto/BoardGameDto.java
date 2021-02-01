@@ -2,18 +2,24 @@ package org.moto.tryingstuff.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Set;
+import org.moto.tryingstuff.model.Theme;
 
 @Data
 @AllArgsConstructor
 public class BoardGameDto {
 
-    private String name;
+    private long id;
 
-    private short minAge;
+    private String name;
 
     private String publisherName;
 
-    private Set<String> themesNames;
+    private Theme theme;
+
+    public BoardGameDto(long id, String name, String publisherName, String themeName, String themeShortDesc) {
+        this.id = id;
+        this.name = name;
+        this.publisherName = publisherName;
+        this.theme = new Theme(themeName, themeShortDesc);
+    }
 }
