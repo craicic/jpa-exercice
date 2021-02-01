@@ -37,8 +37,17 @@ class BoardGameRepositoryTest {
     }
 
     @Test
-    void findDtoById_ListShouldNotBeEmpty() {
+    void findDtosById_ListShouldNotBeEmpty() {
         List<BoardGameDto> games = criteriaRepository.findDtosById(2L);
+        for (BoardGameDto game: games) {
+            logger.debug("-----> NEW GAME FOUND : " + game.toString());
+        }
+        assertFalse(games.isEmpty());
+    }
+
+    @Test
+    void findDtosByIdWithJoin_ListShouldNotBeEmpty() {
+        List<BoardGameDto> games = criteriaRepository.findDtosByIdWithJoin(2L);
         for (BoardGameDto game: games) {
             logger.debug("-----> NEW GAME FOUND : " + game.toString());
         }

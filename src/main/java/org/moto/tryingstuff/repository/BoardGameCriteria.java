@@ -7,4 +7,6 @@ import java.util.List;
 public interface BoardGameCriteria {
 
     List<BoardGameDto> findDtosById(long id);
+
+    List<BoardGameDto> findDtosByIdWithJoin(long id);
 }
