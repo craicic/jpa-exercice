@@ -7,7 +7,7 @@ Here the model schema :
 
 ![alt text](https://github.com/xxjokerx/jpa-exercice/blob/main/doc/model%20-%20with%20needed%20fields.jpg?raw=true)
 
-The test which fetch those datas is call `findDtosById_ListShouldNotBeEmpty` (with no JOIN clause) and 
+The test which fetch those datas are called `findDtosById_ListShouldNotBeEmpty` (with no JOIN clause) and 
 `findDtosByIdWithJoin_ListShouldNotBeEmpty` (with JOIN clause).
 
 
@@ -16,4 +16,4 @@ The test which fetch those datas is call `findDtosById_ListShouldNotBeEmpty` (wi
 If you want to run the `TryingStuffApplication` directly, you have to configure a postgresql database (and the `application.properties`).
 You could also edit pom.xml to use h2 at runtime.
 
-Finally, tests should run smoothly.
+Tests should run natively.
