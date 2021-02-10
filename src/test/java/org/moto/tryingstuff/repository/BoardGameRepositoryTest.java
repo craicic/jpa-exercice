@@ -2,6 +2,7 @@ package org.moto.tryingstuff.repository;
 
 import org.junit.jupiter.api.Test;
 import org.moto.tryingstuff.dto.BoardGameDto;
+import org.moto.tryingstuff.dto.BoardGameFullDto;
 import org.moto.tryingstuff.model.BoardGame;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,6 +52,12 @@ class BoardGameRepositoryTest {
         for (BoardGameDto game: games) {
             logger.debug("-----> NEW GAME FOUND : " + game.toString());
         }
+        assertFalse(games.isEmpty());
+    }
+
+    @Test
+    void findDtosWithRT_shouldAtLeastLogStuff() {
+        List<BoardGameFullDto> games = criteriaRepository.findDtosWithRT(2L);
         assertFalse(games.isEmpty());
     }
 }
