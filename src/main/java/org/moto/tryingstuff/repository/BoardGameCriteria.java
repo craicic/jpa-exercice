@@ -12,4 +12,6 @@ public interface BoardGameCriteria {
     List<BoardGameDto> findDtosByIdWithJoin(long id);
 
     List<BoardGameFullDto> findDtosWithRT(long id);
+
+    List<BoardGameFullDto> findDtosWithRTNoMaps(long id);
 }

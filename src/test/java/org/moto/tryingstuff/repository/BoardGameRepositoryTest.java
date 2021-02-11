@@ -13,6 +13,8 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.stereotype.Repository;
 import org.springframework.test.context.jdbc.Sql;
 
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -56,8 +58,23 @@ class BoardGameRepositoryTest {
     }
 
     @Test
-    void findDtosWithRT_shouldAtLeastLogStuff() {
+    void findDtosWithRTNoMaps_shouldLogThings() {
+        Instant start = Instant.now();
+        List<BoardGameFullDto> games = criteriaRepository.findDtosWithRTNoMaps(2L);
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        logger.debug("Time elapsed : " + timeElapsed + "ms");
+        assertFalse(games.isEmpty());
+    }
+
+    @Test
+    void findDtosWithRT_shouldLogThings() {
+
+        Instant start = Instant.now();
         List<BoardGameFullDto> games = criteriaRepository.findDtosWithRT(2L);
+        Instant finish = Instant.now();
+        long timeElapsed = Duration.between(start, finish).toMillis();
+        logger.debug("Time elapsed : " + timeElapsed + "ms");
         assertFalse(games.isEmpty());
     }
 }
