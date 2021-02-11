@@ -6,6 +6,7 @@ import org.hibernate.transform.ResultTransformer;
 import org.hibernate.type.StandardBasicTypes;
 import org.moto.tryingstuff.dto.BoardGameDto;
 import org.moto.tryingstuff.dto.BoardGameFullDto;
+import org.moto.tryingstuff.dto.BoardGameMinDto;
 import org.moto.tryingstuff.dto.ThemeDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,36 @@ public class BoardGameCriteriaImpl implements BoardGameCriteria {
         this.em = em;
     }
 
+
+    @Override
+    public List<BoardGameMinDto> findAllDto() {
+        TypedQuery<BoardGameMinDto> q = em.createQuery(
+                " SELECT new org.moto.tryingstuff.dto.BoardGameMinDto(bg.id, bg.name, p.name) " +
+                        " FROM BoardGame as bg " +
+                        " JOIN Publisher p ON bg.publisher = p ", BoardGameMinDto.class);
+        return q.getResultList();
+    }
+
+    @Override
+    public List<BoardGameFullDto> findAllGames() {
+        TypedQuery<BoardGameFullDto> q = em.createQuery(
+                " SELECT new org.moto.tryingstuff.dto.BoardGameFullDto(bg.id, bg.name, p.name) " +
+                        " FROM BoardGame as bg " +
+                        " JOIN Publisher p ON bg.publisher = p ", BoardGameFullDto.class);
+        return q.getResultList();
+    }
+
+
+    public List<ThemeDto> findAssociatedTheme(long gameId) {
+        TypedQuery<ThemeDto> q = em.createQuery(
+                " SELECT new org.moto.tryingstuff.dto.ThemeDto( t.name, t.shortDesc) " +
+                        " FROM Theme as t " +
+                        " JOIN t.boardGames bg " +
+                        " WHERE bg.id = :id ", ThemeDto.class);
+        return q.setParameter("id", gameId).getResultList();
+    }
+
+    @Override
     public List<BoardGameDto> findDtosById(long id) {
         TypedQuery<BoardGameDto> q = em.createQuery(
                 "SELECT new org.moto.tryingstuff.dto.BoardGameDto(bg.id, bg.name , p.name, t.name, t.shortDesc) " +
@@ -41,6 +72,7 @@ public class BoardGameCriteriaImpl implements BoardGameCriteria {
         return q.setParameter("id", id).getResultList();
     }
 
+    @Override
     public List<BoardGameDto> findDtosByIdWithJoin(long id) {
         TypedQuery<BoardGameDto> q = em.createQuery(
                 "SELECT new org.moto.tryingstuff.dto.BoardGameDto(bg.id, bg.name , p.name, t.name, t.shortDesc) " +
@@ -50,6 +82,7 @@ public class BoardGameCriteriaImpl implements BoardGameCriteria {
         return q.setParameter("id", id).getResultList();
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<BoardGameFullDto> findDtosWithRTNoMaps(long id) {
 
@@ -128,6 +161,7 @@ public class BoardGameCriteriaImpl implements BoardGameCriteria {
         return games;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public List<BoardGameFullDto> findDtosWithRT(long id) {
 
