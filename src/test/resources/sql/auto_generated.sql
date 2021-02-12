@@ -1,18 +1,10 @@
-TRUNCATE table board_game_theme restart identity CASCADE;
-TRUNCATE table theme restart identity CASCADE;
-TRUNCATE table board_game restart identity CASCADE;
-TRUNCATE table publisher restart identity CASCADE;
-
-/*
-
-*/
-CREATE OR REPLACE FUNCTION random_between(low INT ,high INT)
-    RETURNS INT AS
-$$
-BEGIN
-    RETURN floor(random()* (high-low + 1) + low);
-END;
-$$ language 'plpgsql' STRICT;
+-- CREATE OR REPLACE FUNCTION random_between(low INT ,high INT)
+--     RETURNS INT AS
+-- $$
+-- BEGIN
+--     RETURN floor(random()* (high-low + 1) + low);
+-- END;
+-- $$ language 'plpgsql' STRICT;
 
 INSERT INTO publisher (id, name, website)
 SELECT seq, 'publisher_' || seq, 'www.' || MD5(random()::text) || '.com'
@@ -31,7 +23,7 @@ SELECT seq,
 FROM generate_series(21, 1000) AS seq;
 
 INSERT INTO board_game_theme(fk_game, fk_theme)
-SELECT generate_series(21, 1000), random_between(11, 15);
+SELECT generate_series(21, 1000), random_between(11 ,15);
 
 INSERT INTO board_game_theme(fk_game, fk_theme)
-SELECT generate_series(21, 1000), random_between(16, 20);
+SELECT generate_series(21, 1000), random_between(16 ,20);
